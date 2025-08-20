@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orange Point</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background: #f9f9f9;
+    }
+    header {
+      background: #ff6600;
+      color: white;
+      padding: 20px;
+    }
+    h1 { margin: 0; }
+    .product {
+      margin: 40px auto;
+      max-width: 400px;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .price {
+      font-size: 1.5em;
+      color: #333;
+    }
+    .paypal-btn {
+      background: #ffc439;
+      border: none;
+      padding: 12px 20px;
+      margin-top: 15px;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .paypal-btn:hover {
+      background: #e0ac2b;
+    }
+    footer {
+      margin-top: 40px;
+      padding: 15px;
+      background: #222;
+      color: #ddd;
+    }
+    footer a {
+      color: #ff6600;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Orange Point</h1>
+    <p>Premium Fishing Accessories</p>
+  </header>
+
+  <main>
+    <section class="product">
+      <img id="product-image" src="images/rod-white.heic" alt="Rod Protector">
+      <h2>Rod Protector</h2>
+      <p class="price">45 BGN</p>
+      <p class="desc">Made of <b>genuine leather</b>. Protects your fishing rod with style and durability.</p>
+
+      <label for="color">Choose color:</label>
+      <select id="color" onchange="changeImage()">
+        <option value="white">White</option>
+        <option value="gray">Gray</option>
+        <option value="red">Red</option>
+      </select>
+
+      <!-- PayPal button -->
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="ilia_klinkov@outlook.com">
+        <input type="hidden" name="item_name" value="Rod Protector - Orange Point">
+        <input type="hidden" name="amount" value="45.00">
+        <input type="hidden" name="currency_code" value="BGN">
+        <input type="hidden" name="button_subtype" value="services">
+        <input type="hidden" name="no_note" value="0">
+        <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+        <button type="submit" class="paypal-btn">Buy with PayPal</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Contact: <a href="mailto:ilia_klinkov@outlook.com">ilia_klinkov@outlook.com</a> | Tel: 0882763356</p>
+  </footer>
+
+  <script>
+    function changeImage() {
+      const color = document.getElementById("color").value;
+      const img = document.getElementById("product-image");
+      if(color === "white") img.src = "images/rod-white.heic";
+      else if(color === "gray") img.src = "images/rod-gray.heic";
+      else if(color === "red") img.src = "images/rod-red.heic";
+    }
+
+    // Конверсия на HEIC изображения в JPEG
+    function heicToImg(imgElement) {
+      const src = imgElement.src;
+      if(src.toLowerCase().endsWith(".heic")) {
+        fetch(src)
+          .then(res => res.blob())
+          .then(blob => {
+            const reader = new FileReader();
+            reader.onload = function() {
+              const image = new Image();
+              image.onload = function() {
+                const canvas = document.createElement("canvas");
+                canvas.width = image.width;
+                canvas.height = image.height;
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(image, 0, 0);
+                imgElement.src = canvas.toDataURL("image/jpeg");
+              };
+              image.src = reader.result;
+            };
+            reader.readAsDataURL(blob);
+          })
+          .catch(err => console.log("Cannot convert HEIC:", err));
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const images = document.querySelectorAll("img");
+      images.forEach(img => heicToImg(img));
+    });
+  </script>
+</body>
+</html>
