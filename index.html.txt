@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orange Point</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Orange Point</h1>
+    <p>Premium Fishing Accessories</p>
+  </header>
+
+  <main>
+    <section class="product">
+      <img id="product-image" src="images/rod-white.jpg" alt="Rod Protector">
+      <h2>Rod Protector</h2>
+      <p class="price">45 BGN</p>
+      <p class="desc">Made of <b>genuine leather</b>. Protects your fishing rod with style and durability.</p>
+
+      <label for="color">Choose color:</label>
+      <select id="color" onchange="changeImage()">
+        <option value="white">White</option>
+        <option value="gray">Gray</option>
+        <option value="red">Red</option>
+      </select>
+
+      <!-- PayPal button -->
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="ilia_klinkov@outlook.com">
+        <input type="hidden" name="item_name" value="Rod Protector - Orange Point">
+        <input type="hidden" name="amount" value="45.00">
+        <input type="hidden" name="currency_code" value="BGN">
+        <input type="hidden" name="button_subtype" value="services">
+        <input type="hidden" name="no_note" value="0">
+        <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+        <button type="submit" class="paypal-btn">Buy with PayPal</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Contact: <a href="mailto:ilia_klinkov@outlook.com">ilia_klinkov@outlook.com</a> | Tel: 0882763356</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

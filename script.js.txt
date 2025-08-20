@@ -1,0 +1,11 @@
+function changeImage() {
+  const color = document.getElementById("color").value;
+  const img = document.getElementById("product-image");
+  if (color === "white") {
+    img.src = "images/rod-white.jpg";
+  } else if (color === "gray") {
+    img.src = "images/rod-gray.jpg";
+  } else if (color === "red") {
+    img.src = "images/rod-red.jpg";
+  }
+}
